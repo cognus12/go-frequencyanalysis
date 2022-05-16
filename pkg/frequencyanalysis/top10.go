@@ -8,14 +8,13 @@ import (
 
 var rgxp *regexp.Regexp
 
-// var pattern string = `^,|,$|^\.|\.{1,}$|^-|-$|^!|!$|^:|:$|^"|"$`
-var pattern string = `^[,|-|!|:|;|"|\.{1,}]|[,|-|!|:|;|"|\.{1,}]$`
+var pattern string = `^-|-$|[,|!|:|;|"|\.{1,}]`
 
 func init() {
 	rgxp = regexp.MustCompile(pattern)
 }
 
-func CleanWord(w string) string {
+func cleanWord(w string) string {
 	result := rgxp.ReplaceAllString(w, "")
 
 	return strings.ToLower(result)
@@ -27,8 +26,8 @@ func Top10(s string) []string {
 
 	for _, w := range strings.Fields(s) {
 
-		fmt.Println("origin: ", w, "cleaned: ", CleanWord(w))
-		res = append(res, CleanWord(w))
+		fmt.Println("origin: ", w, "cleaned: ", cleanWord(w))
+		res = append(res, cleanWord(w))
 	}
 
 	return res

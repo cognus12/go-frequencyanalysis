@@ -68,6 +68,11 @@ func sortByCount(data []wordCount) []wordCount {
 		return data[i].Count > data[j].Count
 	})
 
+	return data
+}
+
+func createTop(data []wordCount) []string {
+	var top []string
 	var limit int
 
 	if len(data) > 10 {
@@ -76,13 +81,7 @@ func sortByCount(data []wordCount) []wordCount {
 		limit = len(data)
 	}
 
-	top := data[0:limit]
-
-	return top
-}
-
-func createTop(data []wordCount) []string {
-	var top []string
+	data = data[0:limit]
 
 	for _, w := range data {
 		top = append(top, w.Word)
